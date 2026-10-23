@@ -7,9 +7,14 @@ def leer (ruta):
         return json.load(datos)
 
 def catalogo(datos):
+
     catalogo=[]
     for dato in datos:
         latitud,longitud,elevacion = obtener_posicion(dato)
+        if elevacion < 100:
+            #print (dato["OBJECT_NAME"], dato["NORAD_CAT_ID"], elevacion)
+            #elevacion = 100
+            continue #2023-091AS 57206 38.087 y BANDWAGON-2 OBJECT AE 62405 -500.796 entregan altutudes menores a 100 :(
         catalogo.append(Satelite(dato["OBJECT_NAME"],dato["NORAD_CAT_ID"],latitud,longitud,elevacion))
     return catalogo
 

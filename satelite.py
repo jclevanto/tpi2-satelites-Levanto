@@ -24,10 +24,10 @@ class Satelite:
             raise ValueError("La altitud debe ser numerica")
 
         if altitud < 100:
-            raise ValueError("La altitud debe ser de al menos 100 km")
+            raise ValueError("La altitud debe ser de al menos 100 km",)
 
         self.nombre = nombre
-        self.catalogo = n_catalogo
+        self.n_catalogo = n_catalogo
         self.latitud = latitud
         self.longitud = longitud
         self.altitud = altitud
@@ -41,10 +41,10 @@ class Satelite:
             return "GEO"
         return "HEO"
 
-    def cadena (self,nombre,n_catalogo,tipo_orbita,altitud):
-        return str(nombre," | ",n_catalogo," | ",tipo_orbita," | ",altitud)
+    def descripcion (self):
+        return (f"{self.nombre} | {self.n_catalogo} | {self.tipo_orbita()} | {self.altitud}")
 
     def zona(self,long_min,lat_min,long_max,lat_max):
-        if lat_min<=self.latitud<=lat_max and long_min<=self.longitud<=long_max:
+        if float(lat_min)<=self.latitud<=float(lat_max) and float(long_min)<=self.longitud<=float(long_max):
             return True
         return False
