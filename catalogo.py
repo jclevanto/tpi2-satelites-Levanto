@@ -21,6 +21,7 @@ def catalogo(datos):
 
 def resumen_orbita(lista_objetos):
     resumen = {}
+    suma = {}
 
     for satelite in lista_objetos:
         tipo = satelite.tipo_orbita()
@@ -31,11 +32,11 @@ def resumen_orbita(lista_objetos):
                 "cantidad": 0,
                 "minimo": altitud,
                 "maximo": altitud,
-                "suma": 0
             }
+            suma[tipo]=0
 
         resumen[tipo]["cantidad"] += 1
-        resumen[tipo]["suma"] += altitud
+        suma[tipo] += altitud
 
         if altitud < resumen[tipo]["minimo"]:
             resumen[tipo]["minimo"] = altitud
@@ -45,10 +46,20 @@ def resumen_orbita(lista_objetos):
 
     for tipo in resumen:
         cantidad = resumen[tipo]["cantidad"]
-        suma = resumen[tipo]["suma"]
+        suma_t = suma[tipo]
 
-        resumen[tipo]["promedio"] = suma / cantidad
-        del resumen[tipo]["suma"]
+        resumen[tipo]["promedio"] = suma_t / cantidad
 
     return resumen
 
+def zona(entrada):
+    cantidad=0
+    cat=leer(entrada[1])
+    print("\n========== OBJETOS EN LA ZONA ==========\n")
+    for satelite in cat:
+        if satelite.zona(entrada[3],entrada[4],entrada[5],entrada[6]):
+            print(satelite.descripcion())
+            cantidad += 1
+    print(f"Habian {cantidad} satelites en la zona")
+
+    return True

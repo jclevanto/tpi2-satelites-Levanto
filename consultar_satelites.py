@@ -1,5 +1,5 @@
 import sys
-from catalogo import catalogo, leer, resumen_orbita
+from catalogo import catalogo, leer, resumen_orbita, zona
 
 entrada = sys.argv
 
@@ -18,18 +18,6 @@ def resumen (ruta):
         print()
 
     return 0
-
-def zona(entrada):
-    cantidad=0
-    cat=catalogo(leer(entrada[1]))
-    print("\n========== OBJETOS EN LA ZONA ==========\n")
-    for satelite in cat:
-        if satelite.zona(entrada[3],entrada[4],entrada[5],entrada[6]):
-            print(satelite.descripcion())
-            cantidad += 1
-    print(f"Habian {cantidad} satelites en la zona")
-
-    return True
 
 if entrada[2]=="resumen":
     resumen(ruta)
